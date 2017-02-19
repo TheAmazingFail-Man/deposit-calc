@@ -41,7 +41,7 @@ int main()
 			m *= 1.15;
 		}
 	}
-	printf ("Money: %.4lf", m);
+	printf ("Money: %.1lf", m);
 
 	return 0;
 }
