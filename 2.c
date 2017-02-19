@@ -7,4 +7,8 @@ int main()
 	scanf("%d", &d);
 	printf("Enter the amount (k)");
 	scanf("%d", &m);
+	if(d > 365 || m < 10){
+		printf("Error404\n");
+		return 0;
+	}
 }
