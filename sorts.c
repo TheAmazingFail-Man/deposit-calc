@@ -49,106 +49,58 @@ void countingsort (int counting[], int n)
     
     t = wtime() - t;
 	printf ("\nCounting: ");
-	for (i = 0; i < n; i++) {
+	/*for (i = 0; i < n; i++) {
 		printf ("%d ", counting[i]);
-	}
+	}*/
     printf ("\nElapsed time: %.20f sec.\n", t);  
 }
 
-void bubblesort (int bubble[], int n)
+void bubblesort (uint32_t *mas[], uint32_t n)
 {
-	int i;
-    double time;
-
-    time = wtime();
-    
-    int t, s = 1;
+    uint32_t i, temp, s = 1;
     while (s) {
         s = 0;
         for (i = 1; i < n; i++) {
-            if (bubble[i] < bubble[i - 1]) {
-                t = bubble[i];
-                bubble[i] = bubble[i - 1];
-                bubble[i - 1] = t;
+            if (*mas[i] < *mas[i - 1]) {
+                t = mas[i];
+                *mas[i] = *mas[i - 1];
+                *mas[i - 1] = t;
                 s = 1;
             }
         }
     }
-    
-    time = wtime() - time;
-	printf ("\nBubble: ");
-	for (i = 0; i < n; i++) {
-		printf ("%d ", bubble[i]);
-	}
-    printf ("\nElapsed time: %.20f sec.\n", time);  
-}
-
-void mergeend (int merge[], int l, int m, int n)
-{
-	int i, low, r;
-    double t;
-
-    t = wtime();
-    
-    int merge2[n];
-    for (i = l; i < n; i++) {
-    	merge2[i] = merge[i];
-    }
-    low = l;
-    r = m + 1;
-    i = l;
-    while (l <= m && r <= n){
-    	if (merge2[l] <= merge2[r]){
-    		merge[i] = merge2[l];
-    		low++;
-    	} else {
-    			merge[i] = merge2[r];
-    			r++;
-    	}
-    	i++;
-    }
-    while(low <= m){
-    	merge[i] = merge2[l];
-    	l++;
-    	i++;
-    }
-    while(r <= n){
-    	merge[i] = merge2[r];
-    	r++;
-    	i++;
-    }
-    
-    t = wtime() - t;
-	printf("\nMerge: ");
-	for(i = 0; i < n; i++){
-		printf("%d ", merge[i]);
-	}
-    printf("\nElapsed time: %.20f sec.\n", t);  
-}
-
-void mergebegin (int merge[], int l, int m, int n)
-{
-	if (l < n) {
-		m = floor((l + n)/2); //округляет числа
-		mergebegin (merge, l, m, n);
-		mergebegin (merge, l, m + 1, n);
-		mergeend (merge, l, m, n);
-	}
 }
 
 int main()
 {
-	int i, l, m, n;
-	printf ("Enter the number of elements of the sorting: ");
-	scanf ("%d", &n);
-	int counting[n], bubble[n], merge[n];
-	for (i = 0; i < n; i++) {
-		counting[i] = getrand(0, 100000);
-		bubble[i] = getrand(0, 100000);
-		merge[i] = getrand(0, 100000);
+	double time;
+	uint32_t n = atoi(argv[1]);
+	for (; n < 1000000; n += 50000) {
+		uint32_t *mas = (uint32_t*)malloc(n * sizeof(uint32_t));
+		for (int i = 0; i < n; i++) {
+			mas[i] = getrand(0, 100000);
+		}
+		time = wtime();
+		countingsort (mas, n);
+		time = wtime() - time;
+		FILE *file = fopen ("countingsort.txt", "a");
+		fprintf (file, "Size of the array: %d	Elapsed time: %.6f\n", n, time);
+		fclose (file);
+	
+		time = wtime();
+		bubblesort (mas, n);
+		time = wtime() - time;
+		FILE *file = fopen ("bubblesort.txt", "a");
+		fprintf (file, "Size of the array: %d	Elapsed time: %.6f\n", n, time);
+		fclose (file);
+	
+		time = wtime();
+		mergesort (*mas, 0, n - 1);
+		time = wtime() - time;
+		FILE *file = fopen ("mergesort.txt", "a");
+		fprintf (file, "Size of the array: %d	Elapsed time: %.6f\n", n, time);
+		fclose (file);
 	}
-	countingsort (counting, n);
-	bubblesort (bubble, n);
-	mergebegin (merge, l, m, n);
-	mergeend (merge, l, m, n);
+	
+	return 0;
 }
