@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "parts.h"
 
 int main()
 {
@@ -8,14 +9,13 @@ int main()
 	scanf ("%d", &d);
 	printf ("Enter the amount (k): ");
 	scanf ("%lf", &m);
-	if (d > 365 || m < 10) {
+	while (d > 365 || m < 10) {
 		printf ("Error404\n");
-		
-		return 0;
 	}
 	if (m > 100){
-		more (m, d);
+		more (&m, d);
 	} else if (m <= 100){
-		less (m, d);
+		less (&m, d);
 	}
+	printf ("Money: %.1lf", m);
 }
