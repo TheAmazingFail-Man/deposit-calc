@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "parts.h"
+#include "parts.c"
 
 int main()
 {
@@ -12,10 +12,10 @@ int main()
 	while (d > 365 || m < 10) {
 		printf ("Error404\n");
 	}
-	if (m > 100){
-		more (&m, d);
-	} else if (m <= 100){
+	if (m <= 100){
 		less (&m, d);
+	} else if (m > 100){
+		more (&m, d);
 	}
 	printf ("Money: %.1lf", m);
 }
