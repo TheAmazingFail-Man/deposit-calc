@@ -91,7 +91,7 @@ int mergehelp (int mas[], int mashelp[], int l, int m, int r)
 	return 0;
 }
 
-int mergesort (int mas, int mashelp, int l, int r)
+int mergesort (int mas[], int mashelp[], int l, int r)
 {
 	int m;
 	if (l < r) {
