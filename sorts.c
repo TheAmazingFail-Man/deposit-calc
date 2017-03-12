@@ -14,16 +14,16 @@ int getrand (int mini, int maxi)
     return (double)rand() / (RAND_MAX + 1.0) * (maxi - mini) + mini;
 }
 
-void countingsort (int counting[], int n)
+int countingsort (int mas[], int n)
 {
 	int i, min, max;
-  	min = counting[0];
-  	max = counting[0];
+  	min = mas[0];
+  	max = mas[0];
   	for (i = 1; i < n; i++) {
-  		if ( counting[i] < min ) {
-  	  		min = counting[i];
-  	  	} else if ( counting[i] > max ) {
-  	    	max = counting[i];
+  		if ( mas[i] < min ) {
+  	  		min = mas[i];
+  	  	} else if ( mas[i] > max ) {
+  	    	max = mas[i];
     	}
   	}
   	int j, z;
@@ -33,16 +33,18 @@ void countingsort (int counting[], int n)
   		cow[i] = 0;
   	}
   	for (i = 0; i < n; i++) {
-  		cow[counting[i] - min]++;
+  		cow[mas[i] - min]++;
   	}
   	for (i = min, z = 0; i <= max; i++) {
     	for (j = 0; j < cow[i - min]; j++) {
-    	  counting[z++] = i;
+    	  mas[z++] = i;
     	}
 	}
+	
+	return 0;
 }
 
-void bubblesort (int mas[], int n)
+int bubblesort (int mas[], int n)
 {
     int i, temp, s = 1;
     while (s) {
@@ -56,6 +58,8 @@ void bubblesort (int mas[], int n)
             }
         }
     }
+	
+    return 0;
 }
 
 int mergehelp (int mas[], int mashelp[], int l, int m, int r)
@@ -96,7 +100,7 @@ int mergesort (int mas[], int mashelp[], int l, int r)
 	int m;
 	if (l < r) {
 		m = (l + r) / 2;
-		mergesort (mas, mashelp, l, r);
+		mergesort (mas, mashelp, l, m);
 		mergesort (mas, mashelp, m + 1, r);
 		mergehelp (mas, mashelp, l, m, r);
 	}
@@ -107,32 +111,35 @@ int mergesort (int mas[], int mashelp[], int l, int r)
 int main()
 {
 	double time;
-	for (int n = 50000; n < 1000000; n += 50000) {
+	int i, n;
+	for (n = 50000; n <= 1000000; n += 50000) {
 		int *mas = malloc(n * sizeof(int));
 		int *mashelp = malloc(n * sizeof(int));
-		for (int i = 0; i < n; i++) {
+		for (i = 0; i < n; i++) {
 			mas[i] = getrand(0, 100000);
 		}
 		time = wtime();
 		countingsort (mas, n);
 		time = wtime() - time;
-		FILE *file1 = fopen ("countingsort.dat", "w");
-		fprintf (file1, "Size of the array: %d	Elapsed time: %.6f\n", n, time);
+		FILE *file1 = fopen ("countingsort.dat", "a");
+		fprintf (file1, "%d %.6f\n", n, time);
 		fclose (file1);
 	
 		time = wtime();
 		bubblesort (mas, n);
 		time = wtime() - time;
-		FILE *file2 = fopen ("bubblesort.dat", "w");
-		fprintf (file2, "Size of the array: %d	Elapsed time: %.6f\n", n, time);
+		FILE *file2 = fopen ("bubblesort.dat", "a");
+		fprintf (file2, "%d %.6f\n", n, time);
 		fclose (file2);
 	
 		time = wtime();
 		mergesort (mas, mashelp, 0, n);
 		time = wtime() - time;
-		FILE *file3 = fopen ("mergesort.dat", "w");
-		fprintf (file3, "Size of the array: %d	Elapsed time: %.6f\n", n, time);
+		FILE *file3 = fopen ("mergesort.dat", "a");
+		fprintf (file3, "%d %.6f\n", n, time);
 		fclose (file3);
+		free(mas);
+		free(mashelp);
 	}
 	
 	return 0;
