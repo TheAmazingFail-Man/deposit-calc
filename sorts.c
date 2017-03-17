@@ -44,7 +44,7 @@ int countingsort (int mas1[], int n)
 	return 0;
 }
 
-int bubblesort (int mas2[], int n)
+/*int bubblesort (int mas2[], int n)
 {
     int i, temp, s = 1;
     while (s) {
@@ -106,7 +106,7 @@ int mergesort (int mas3[], int mashelp[], int l, int r)
 	}
 	
 	return 0;
-}
+}*/
 
 int main()
 {
@@ -121,32 +121,26 @@ int main()
 			mas1[i] = mas2[i] = mas3[i] =  getrand(0, 100000);
 		}
 		
-		while (n != 500000) {
 		time = wtime();
 		countingsort (mas1, n);
 		time = wtime() - time;
 		FILE *file1 = fopen ("countingsort.dat", "a");
 		fprintf (file1, "%d %.6f\n", n, time);
 		fclose (file1);
-		}
 		
-		while (n != 200000) {
-		time = wtime();
+		/*time = wtime();
 		bubblesort (mas2, n);
 		time = wtime() - time;
 		FILE *file2 = fopen ("bubblesort.dat", "a");
 		fprintf (file2, "%d %.6f\n", n, time);
 		fclose (file2);
-		}
 	
-		while (n != 500000) {
 		time = wtime();
 		mergesort (mas3, mashelp, 0, n);
 		time = wtime() - time;
 		FILE *file3 = fopen ("mergesort.dat", "a");
 		fprintf (file3, "%d %.6f\n", n, time);
-		fclose (file3);
-		}
+		fclose (file3);*/
 		
 		free(mas1);
 		free(mas2);
