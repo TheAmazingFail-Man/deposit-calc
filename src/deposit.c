@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "parts.h"
+#include "deposit.h"
 
-void less (double *m, int d)
+void less(double *m, int d)
 {
 	if (d >= 0 && d <= 30) {
 		*m *= 0.9;
@@ -17,7 +17,7 @@ void less (double *m, int d)
 	}
 }
 
-void more (double *m, int d)
+void more(double *m, int d)
 {
 	if (d >= 0 && d <= 30) {
 		*m *= 0.9;
