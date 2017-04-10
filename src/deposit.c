@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include "deposit.h"
-//#include guard
-//#pragma once
 
 void less(double *m, int d)
 {

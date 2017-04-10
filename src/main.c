@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include "deposit.h"
-//#include guards
-//#pragma once
 
 int main()
 {
