@@ -90,8 +90,3 @@ CTEST(calculating, test11)
 {
         ASSERT_EQUAL(118800, result(110000, 240));
 }
-
-CTEST(calculating, test12)
-{
-        ASSERT_EQUAL(126500, result(110000, 241));
-}
