@@ -21,5 +21,6 @@ build/test/main.o: test/main.c
 	gcc -Wall -Werror -I src -I thirdparty -c test/main.c -o build/test/main.o
 
 .PHONY: clean
+
 clean:
 	rm -rf build/src/*.o build/test/*.o bin/*
