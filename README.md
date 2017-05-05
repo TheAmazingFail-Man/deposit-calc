@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/TheAmazingFail-Man/deposit-calc.svg?branch=MasterCow)](https://travis-ci.org/TheAmazingFail-Man/deposit-calc)
+[![Build Status](https://travis-ci.org/TheAmazingFail-Man/deposit-calc.svg?branch=MasterCow)](https://travis-ci.org/TheAmazingFail-Man/deposit-calc)https://travis-ci.org/TheAmazingFail-Man/deposit-calc.svg?branch=master
